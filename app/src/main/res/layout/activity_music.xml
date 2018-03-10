@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.example.bpeeten.auto_dashboard_2.activities.MusicActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <Button
+        android:id="@+id/search_albums_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="107dp"
+        android:background="@android:color/black"
+        android:text="Zoek albums"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="70dp" />
+
+    <Button
+        android:id="@+id/search_song_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/song_textview"
+        android:layout_alignBottom="@+id/song_textview"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/black"
+        android:text="Zoek nummers"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+    <EditText
+        android:id="@+id/albums_textview"
+        android:layout_width="203dp"
+        android:layout_height="44dp"
+        android:layout_above="@+id/song_textview"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:hint="Geef artiesten naam"
+        android:textColorHint="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+    <EditText
+        android:id="@+id/song_textview"
+        android:layout_width="200dp"
+        android:layout_height="44dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/search_albums_btn"
+        android:layout_marginTop="69dp"
+        android:gravity="center"
+        android:hint="Geef een artiesten naam"
+        android:textColorHint="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="70dp" />
+</RelativeLayout>

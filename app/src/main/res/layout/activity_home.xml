@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bpeeten.auto_dashboard_2.activities.HomeActivity">
+
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/colorAccent"
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+
+        <TableRow
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="serif"
+                android:gravity="center_horizontal"
+                android:text="@string/home"
+                android:textColor="@android:color/white"
+                android:textSize="30dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0">
+
+            <Button
+                android:id="@+id/sms_button"
+                android:onClick="sms_OnClick"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/sms"
+                android:text="SMS" />
+
+            <Button
+                android:id="@+id/spotify_button"
+                android:onClick="spotify_OnClick"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/spotify"
+                android:text="Spotify" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0" >
+
+            <Button
+                android:id="@+id/weer_button"
+                android:onClick="weer_Onclick"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:text="Weer"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/weer"/>
+
+            <Button
+                android:id="@+id/messenger_button"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:text="Messenger"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/messenger"/>
+        </TableRow>
+    </TableLayout>
+
+
+</android.support.constraint.ConstraintLayout>
