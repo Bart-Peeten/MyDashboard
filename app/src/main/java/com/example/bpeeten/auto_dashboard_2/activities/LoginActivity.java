@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private String                    prefEmail;
     private String                    prefPasswd;
     android.support.v7.widget.Toolbar toolbar;
+    private static String             USERINFO = "USERINFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
 
         mail.setText(prefEmail);
         passwd.setText(prefPasswd);
+
+        if (!mail.getText().toString().isEmpty() && !passwd.getText().toString().isEmpty()){
+            openHomeActivity();
+        }
     }
 
     @Override
@@ -55,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
-
-
 
     public void register(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
@@ -71,15 +74,13 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Vul alle velden in a.u.b", Toast.LENGTH_LONG).show();
         }
         else{
-            // Save the user login info in sharedPreferences.
-            saveLoginPreferences(givenPassword, givenEmail);
-
-            // Show a toast to inform the user the login is saved in SharedPreferences.
-            Toast.makeText(this, "login information is saved", Toast.LENGTH_LONG).show();
-
             // Check if the user login is correct.
             logedInUser = userOperations.checkUser(new User(givenEmail, givenPassword));
             if (logedInUser != null) {
+                // Save the user login info in sharedPreferences.
+                saveLoginPreferences(givenPassword, givenEmail);
+                // Show a toast to inform the user the login is saved in SharedPreferences.
+                Toast.makeText(this, "login information bewaard", Toast.LENGTH_LONG).show();
                 // Open the Home activity.
                 openHomeActivity();
             }
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void saveLoginPreferences(String givenPassword, String givenEmail) {
         // safe login in SharedPreferences.
-        SharedPreferences preferences = getSharedPreferences("USERINFO", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(USERINFO, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Password", givenPassword);
         editor.putString("Email", givenEmail);
@@ -96,14 +97,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openHomeActivity() {
-        Toast.makeText(this, "User" + mail.getText().toString() + " en Paswoord zijn een match.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "User " + "'" +
+                mail.getText().toString().toUpperCase() +
+                "' en Paswoord zijn een match.",
+                Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra("User", logedInUser);
         startActivity(intent);
     }
 
     private void getUserInfoFromPref(){
-        SharedPreferences preferences = getSharedPreferences("USERINFO", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(USERINFO, MODE_PRIVATE);
         prefEmail = preferences.getString("Email", "");
         prefPasswd = preferences.getString("Password", "");
     }
