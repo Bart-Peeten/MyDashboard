@@ -4,7 +4,7 @@
     <string name="logIn">Login</string>
     <string name="home">Home</string>
     <string name="login_button"><b>Login</b></string>
-    <string name="signup_button"><b>Sign_up</b></string>
+    <string name="signup_button"><b>Register</b></string>
     <string name="create_account_button"><b>Create Account</b></string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_login">Sign in</string>
