@@ -14,14 +14,14 @@ import com.example.bpeeten.auto_dashboard_2.dbHelpers.UserOperations;
 import com.example.bpeeten.auto_dashboard_2.models.User;
 
 
-public class SignupActivity extends AppCompatActivity{
+public class RegisterActivity extends AppCompatActivity{
 
         EditText name;
         EditText email;
         EditText passwd;
-        String userPasswd;
-        String userEmail;
-        String userName;
+        String   userPasswd;
+        String   userEmail;
+        String   userName;
 
         UserOperations userOperations;
         android.support.v7.widget.Toolbar toolbar;

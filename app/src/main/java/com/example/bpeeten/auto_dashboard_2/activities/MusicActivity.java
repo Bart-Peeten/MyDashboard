@@ -3,6 +3,7 @@ package com.example.bpeeten.auto_dashboard_2.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +14,9 @@ import com.example.bpeeten.auto_dashboard_2.R;
 
 public class MusicActivity extends AppCompatActivity {
     /* This Activity will make use of the lastfm API */
-    private              Button   searchAlbumBtn;
-    private              TextView searchAlbumTextView;
+    private Button   searchAlbumBtn;
+    private TextView searchAlbumTextView;
+    private Toolbar  toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

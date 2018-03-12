@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context="com.example.bpeeten.auto_dashboard_2.activities.SignupActivity">
+    tools:context="com.example.bpeeten.auto_dashboard_2.activities.RegisterActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
             android:fontFamily="serif"
             android:gravity="center_horizontal"
             android:text="@string/signUp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="20dp" />
 
         <!-- Name Label -->
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:hint="Name"
             android:inputType="textPersonName"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"/>
+            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/black"/>
 
         <!--  Email Label -->
         <EditText
@@ -51,8 +51,8 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"/>
+            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/black"/>
 
         <!-- Password Label -->
         <EditText
@@ -61,8 +61,8 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"/>
+            android:textColorHint="@android:color/black"
+            android:textColor="@android:color/black"/>
 
         <!-- Signup Button -->
         <Button
@@ -84,7 +84,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="Already a member? Login"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="16dip" />
 
     </LinearLayout>

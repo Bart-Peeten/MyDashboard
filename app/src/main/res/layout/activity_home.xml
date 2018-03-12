@@ -36,7 +36,7 @@
                 android:fontFamily="serif"
                 android:gravity="center_horizontal"
                 android:text="@string/home"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="30dp"/>
 
         </TableRow>
@@ -51,7 +51,7 @@
                 android:id="@+id/sms_button"
                 android:onClick="sms_OnClick"
                 android:background="@color/colorAccent"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -63,7 +63,7 @@
                 android:id="@+id/spotify_button"
                 android:onClick="spotify_OnClick"
                 android:background="@color/colorAccent"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -83,7 +83,7 @@
                 android:id="@+id/weer_button"
                 android:onClick="weer_Onclick"
                 android:background="@color/colorAccent"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:text="Weer"
                 android:layout_width="0dp"
@@ -94,7 +94,7 @@
             <Button
                 android:id="@+id/messenger_button"
                 android:background="@color/colorAccent"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="20dp"
                 android:text="Messenger"
                 android:layout_width="0dp"
