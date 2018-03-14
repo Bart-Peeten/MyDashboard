@@ -29,12 +29,9 @@ public class SettingsActivity extends AppCompatActivity {
         redButton   = (Button) findViewById(R.id.red_btn);
         greenButton = (Button) findViewById(R.id.green_btn);
         blueButton  = (Button) findViewById(R.id.blue_btn);
-        preferences = new PreferencesImpl();
+        preferences = new PreferencesImpl(this);
 
-        if (preferences.getColor(this) != getResources().getColor(R.color.colorPrimary)){
-            toolbar.setBackgroundColor(preferences.getColor(this));
-            getWindow().setStatusBarColor(preferences.getColor(this));
-        }
+        checkBackgroundColor();
 
         redButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +65,13 @@ public class SettingsActivity extends AppCompatActivity {
                 goToHome();
             }
         });
+    }
+
+    private void checkBackgroundColor() {
+        if (preferences.getColor() != getResources().getColor(R.color.colorPrimary)){
+            toolbar.setBackgroundColor(preferences.getColor());
+            getWindow().setStatusBarColor(preferences.getColor());
+        }
     }
 
 

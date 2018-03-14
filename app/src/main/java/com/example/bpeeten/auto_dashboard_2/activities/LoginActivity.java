@@ -1,5 +1,6 @@
 package com.example.bpeeten.auto_dashboard_2.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.UnicodeSetSpanner;
@@ -20,6 +21,9 @@ import com.example.bpeeten.auto_dashboard_2.controllers.PreferencesImpl;
 import com.example.bpeeten.auto_dashboard_2.dbHelpers.UserOperations;
 import com.example.bpeeten.auto_dashboard_2.interfaces.Preferences;
 import com.example.bpeeten.auto_dashboard_2.models.User;
+
+import java.io.File;
+import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,22 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         Button signUpButton = (Button) findViewById(R.id.btn_signup);
         toolbar             = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         preferences         = new PreferencesImpl(this);
+        userOperations      = new UserOperations(this);
         setSupportActionBar(toolbar);
         // Check if the color of the app matched with the color
         // in the SharedPreferences.
         checkBackgroundColor();
-
-        userOperations = new UserOperations(this);
-        getUserInfoFromPref();
-
-        Log.e("PREF TAG", prefEmail + " " + prefPasswd);
-
-        mail.setText(prefEmail);
-        passwd.setText(prefPasswd);
-
-        if (!mail.getText().toString().isEmpty() && !passwd.getText().toString().isEmpty()){
-            openHomeActivity();
-        }
     }
 
     private void checkBackgroundColor() {
@@ -72,6 +65,45 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         checkBackgroundColor();
+        Bundle b = getIntent().getExtras();
+        String result = b.getString("logout");
+        if (result != null) {
+            Log.d("INTENT_TAG", "Logout is gedrukt.");
+            if (result.equals("LOGOUT")) {
+                passwd.setText("");
+                mail.setText("");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    boolean pref = deleteSharedPreferences(USERINFO);
+                    clearPreferences();
+                    Log.d("DELETE_TAG", "Delete SharedPreferences");
+                }
+                else {
+                    String filePath = getApplicationContext().getFilesDir().getParent()+"/shared_prefs/USERINFO.xml";
+                    File deletePrefFile = new File(filePath );
+                    deletePrefFile.delete();
+                    clearPreferences();
+                    Log.d("DELETE_TAG", "Delete SharedPreferences");
+                }
+            }
+            else{
+                getUserInfoFromPref();
+                Log.e("PREF TAG", prefEmail + " " + prefPasswd);
+                mail.setText(prefEmail);
+                passwd.setText(prefPasswd);
+                if (!mail.getText().toString().isEmpty() && !passwd.getText().toString().isEmpty()) {
+                    openHomeActivity();
+                }
+            }
+        }
+        else {
+            getUserInfoFromPref();
+            Log.e("PREF TAG", prefEmail + " " + prefPasswd);
+            mail.setText(prefEmail);
+            passwd.setText(prefPasswd);
+            if (!mail.getText().toString().isEmpty() && !passwd.getText().toString().isEmpty()) {
+                openHomeActivity();
+            }
+        }
     }
 
     @Override
@@ -88,9 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Settings is geselecteerd", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+            case R.id.logout:
+                Intent intentLogout = new Intent(this, LoginActivity.class);
+                intentLogout.putExtra("logout", "LOGOUT");
+                startActivity(intentLogout);
 
-                default:
-                    return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -127,6 +163,13 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("Password", givenPassword);
         editor.putString("Email", givenEmail);
         editor.apply();
+    }
+
+    private void clearPreferences(){
+        SharedPreferences pref = getSharedPreferences(USERINFO, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
     }
 
     private void openHomeActivity() {

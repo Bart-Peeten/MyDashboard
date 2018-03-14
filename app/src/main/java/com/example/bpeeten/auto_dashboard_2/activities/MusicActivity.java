@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,8 +31,8 @@ public class MusicActivity extends AppCompatActivity {
 
         searchAlbumBtn      = (Button)findViewById(R.id.search_albums_btn);
         searchAlbumTextView = (TextView)findViewById(R.id.albums_textview);
-        toolbar        = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        preferences    = new PreferencesImpl(this);
+        toolbar             = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        preferences         = new PreferencesImpl(this);
         setSupportActionBar(toolbar);
 
         searchAlbumBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,4 +63,29 @@ public class MusicActivity extends AppCompatActivity {
         super.onResume();
         checkBackgroundColor();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settings:
+                Toast.makeText(this, "Settings is geselecteerd", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            case R.id.logout:
+                Intent intentLogout = new Intent(this, LoginActivity.class);
+                intentLogout.putExtra("logout", "LOGOUT");
+                startActivity(intentLogout);
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

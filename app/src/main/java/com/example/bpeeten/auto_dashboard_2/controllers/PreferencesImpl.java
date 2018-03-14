@@ -22,10 +22,9 @@ public class PreferencesImpl implements Preferences {
     }
 
     @Override
-
-    public int getColor(Context view){
+    public int getColor(){
         SharedPreferences preferences = context.getSharedPreferences("ColorPreferences", MODE_PRIVATE);
-        int selectedColor = preferences.getInt("color", view.getResources().getColor(R.color.colorPrimary));
+        int selectedColor = preferences.getInt("color", context.getResources().getColor(R.color.colorPrimary));
 
         return selectedColor;
     }

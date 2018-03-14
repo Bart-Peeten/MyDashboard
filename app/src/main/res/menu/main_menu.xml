@@ -8,6 +8,12 @@
         android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@mipmap/logout"
+        app:showAsAction="ifRoom"/>
+
 
 
 

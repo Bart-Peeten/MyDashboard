@@ -62,7 +62,11 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Settings is geselecteerd", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-
+            case R.id.logout:
+                Intent intentLogout = new Intent(this, LoginActivity.class);
+                intentLogout.putExtra("logout", "LOGOUT");
+                startActivity(intentLogout);
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
