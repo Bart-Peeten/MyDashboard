@@ -13,15 +13,17 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bpeeten.auto_dashboard_2.R;
+import com.example.bpeeten.auto_dashboard_2.controllers.PreferencesImpl;
+import com.example.bpeeten.auto_dashboard_2.interfaces.Preferences;
 import com.example.bpeeten.auto_dashboard_2.models.User;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button  sms_button;
-    private Button  spotify_button;
-    private Toolbar toolbar;
-    private User    logedinUser;
-
+    private Button      sms_button;
+    private Button      spotify_button;
+    private Toolbar     toolbar;
+    private User        logedinUser;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +33,26 @@ public class HomeActivity extends AppCompatActivity {
         sms_button     = (Button) findViewById(R.id.sms_button);
         spotify_button = (Button) findViewById(R.id.spotify_button);
         toolbar        = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        preferences    = new PreferencesImpl(this);
         setSupportActionBar(toolbar);
 
         logedinUser = (User) getIntent().getSerializableExtra("User");
 
-        if (getColor() != getResources().getColor(R.color.colorPrimary)){
-            toolbar.setBackgroundColor(getColor());
-            getWindow().setStatusBarColor(getColor());
-        }
+        checkBackgroundColor();
 
+    }
+
+    private void checkBackgroundColor() {
+        if (preferences.getColor() != getResources().getColor(R.color.colorPrimary)){
+            toolbar.setBackgroundColor(preferences.getColor());
+            getWindow().setStatusBarColor(preferences.getColor());
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (getColor() != getResources().getColor(R.color.colorPrimary)){
-            toolbar.setBackgroundColor(getColor());
-            getWindow().setStatusBarColor(getColor());
-        }
+        checkBackgroundColor();
     }
 
     @Override
@@ -86,12 +90,5 @@ public class HomeActivity extends AppCompatActivity {
 
     public void weer_Onclick(View view) {
         Toast.makeText(this, "Wheater page will open", Toast.LENGTH_LONG).show();
-    }
-
-    public int getColor(){
-        SharedPreferences preferences = getSharedPreferences("ColorPreferences", MODE_PRIVATE);
-        int selectedColor = preferences.getInt("color", getResources().getColor(R.color.colorPrimary));
-
-        return selectedColor;
     }
 }

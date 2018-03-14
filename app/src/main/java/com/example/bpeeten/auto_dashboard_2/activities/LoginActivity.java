@@ -16,7 +16,9 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.bpeeten.auto_dashboard_2.R;
+import com.example.bpeeten.auto_dashboard_2.controllers.PreferencesImpl;
 import com.example.bpeeten.auto_dashboard_2.dbHelpers.UserOperations;
+import com.example.bpeeten.auto_dashboard_2.interfaces.Preferences;
 import com.example.bpeeten.auto_dashboard_2.models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private String                    prefPasswd;
     android.support.v7.widget.Toolbar toolbar;
     private static String             USERINFO = "USERINFO";
+    private Preferences               preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         mail                = (EditText) findViewById(R.id.input_email);
         Button signUpButton = (Button) findViewById(R.id.btn_signup);
         toolbar             = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        SettingsActivity settings = new SettingsActivity();
+        preferences         = new PreferencesImpl(this);
         setSupportActionBar(toolbar);
-        if (getColor() != getResources().getColor(R.color.colorPrimary)){
-            toolbar.setBackgroundColor(getColor());
-            getWindow().setStatusBarColor(getColor());
-        }
+        // Check if the color of the app matched with the color
+        // in the SharedPreferences.
+        checkBackgroundColor();
 
         userOperations = new UserOperations(this);
         getUserInfoFromPref();
@@ -59,13 +61,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void checkBackgroundColor() {
+        if (preferences.getColor() != getResources().getColor(R.color.colorPrimary)){
+            toolbar.setBackgroundColor(preferences.getColor());
+            getWindow().setStatusBarColor(preferences.getColor());
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if (getColor() != getResources().getColor(R.color.colorPrimary)){
-            toolbar.setBackgroundColor(getColor());
-            getWindow().setStatusBarColor(getColor());
-        }
+        checkBackgroundColor();
     }
 
     @Override
@@ -137,13 +143,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(USERINFO, MODE_PRIVATE);
         prefEmail = preferences.getString("Email", "");
         prefPasswd = preferences.getString("Password", "");
-    }
-
-    public int getColor(){
-        SharedPreferences preferences = getSharedPreferences("ColorPreferences", MODE_PRIVATE);
-        int selectedColor = preferences.getInt("color", getResources().getColor(R.color.colorPrimary));
-
-        return selectedColor;
     }
 }
 

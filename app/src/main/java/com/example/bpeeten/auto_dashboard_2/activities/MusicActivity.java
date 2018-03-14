@@ -11,12 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bpeeten.auto_dashboard_2.R;
+import com.example.bpeeten.auto_dashboard_2.controllers.PreferencesImpl;
+import com.example.bpeeten.auto_dashboard_2.interfaces.Preferences;
 
 public class MusicActivity extends AppCompatActivity {
     /* This Activity will make use of the lastfm API */
-    private Button   searchAlbumBtn;
-    private TextView searchAlbumTextView;
-    private Toolbar  toolbar;
+    private Button      searchAlbumBtn;
+    private TextView    searchAlbumTextView;
+    private Toolbar     toolbar;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class MusicActivity extends AppCompatActivity {
 
         searchAlbumBtn      = (Button)findViewById(R.id.search_albums_btn);
         searchAlbumTextView = (TextView)findViewById(R.id.albums_textview);
+        toolbar        = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        preferences    = new PreferencesImpl(this);
+        setSupportActionBar(toolbar);
 
         searchAlbumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,5 +46,18 @@ public class MusicActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void checkBackgroundColor() {
+        if (preferences.getColor() != getResources().getColor(R.color.colorPrimary)){
+            toolbar.setBackgroundColor(preferences.getColor());
+            getWindow().setStatusBarColor(preferences.getColor());
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkBackgroundColor();
     }
 }

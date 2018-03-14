@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bpeeten.auto_dashboard_2.R;
+import com.example.bpeeten.auto_dashboard_2.controllers.PreferencesImpl;
 import com.example.bpeeten.auto_dashboard_2.dbHelpers.UserOperations;
+import com.example.bpeeten.auto_dashboard_2.interfaces.Preferences;
 import com.example.bpeeten.auto_dashboard_2.models.User;
 
 
@@ -23,8 +25,9 @@ public class RegisterActivity extends AppCompatActivity{
         String   userEmail;
         String   userName;
 
-        UserOperations userOperations;
+        UserOperations                    userOperations;
         android.support.v7.widget.Toolbar toolbar;
+        Preferences                       preferences;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -32,17 +35,33 @@ public class RegisterActivity extends AppCompatActivity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_signup);
 
-            name = (EditText) findViewById(R.id.input_name);
-            email = (EditText) findViewById(R.id.input_email);
-            passwd = (EditText) findViewById(R.id.input_password);
+            name        = (EditText) findViewById(R.id.input_name);
+            email       = (EditText) findViewById(R.id.input_email);
+            passwd      = (EditText) findViewById(R.id.input_password);
+            preferences = new PreferencesImpl(this);
 
             toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
             userOperations = new UserOperations(this);
+
+            checkBackgroundColor();
         }
 
-        @Override
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkBackgroundColor();
+    }
+
+    private void checkBackgroundColor() {
+        if (preferences.getColor() != getResources().getColor(R.color.colorPrimary)){
+            toolbar.setBackgroundColor(preferences.getColor());
+            getWindow().setStatusBarColor(preferences.getColor());
+        }
+    }
+
+    @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.main_menu, menu);
