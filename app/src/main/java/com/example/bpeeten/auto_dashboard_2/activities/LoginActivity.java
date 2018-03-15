@@ -48,9 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         toolbar             = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         preferences         = new PreferencesImpl(this);
         userOperations      = new UserOperations(this);
-        setSupportActionBar(toolbar);
-        // Check if the color of the app matched with the color
-        // in the SharedPreferences.
+        setSupportActionBar(toolbar);;
+        /* Check if the color of the app matched with the color
+           in the SharedPreferences.*/
         checkBackgroundColor();
     }
 
@@ -66,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
         checkBackgroundColor();
         Bundle b = getIntent().getExtras();
-        String result = b.getString("logout");
-        if (result != null) {
+        if (this.getIntent().getExtras() != null) {
             Log.d("INTENT_TAG", "Logout is gedrukt.");
-            if (result.equals("LOGOUT")) {
+            String result = b.getString("logout");
+            if (result != null && result.equals("LOGOUT")) {
                 passwd.setText("");
                 mail.setText("");
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -119,12 +119,15 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.settings:
                 Toast.makeText(this, "Settings is geselecteerd", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, SettingsActivity.class);
+                Log.d("TAG", "Settings gedrukt in LoginActivity");
                 startActivity(intent);
+                return true;
             case R.id.logout:
                 Intent intentLogout = new Intent(this, LoginActivity.class);
                 intentLogout.putExtra("logout", "LOGOUT");
+                Log.d("TAG", "logout gedrukt in LoginActivity");
                 startActivity(intentLogout);
-
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

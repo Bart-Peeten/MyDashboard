@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Auto_Dashboard</string>
+    <string name="app_name">DB</string>
     <string name="signUp">SignUp</string>
     <string name="logIn">Login</string>
     <string name="home">Home</string>
