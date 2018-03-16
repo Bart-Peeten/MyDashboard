@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bpeeten.auto_dashboard_2.R;
 import com.example.bpeeten.auto_dashboard_2.models.ListItemRecyclerViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class AlbumAdapter extends Adapter<AlbumAdapter.ViewHolder> {
 
         holder.textviewArtist.setText(listItem.getArtistName());
         holder.textviewAlbum.setText(listItem.getAlbumName());
+        Picasso.with(context)
+                .load(listItem.getImageUrl())
+                .into(holder.imageId);
 
     }
 
@@ -51,13 +56,15 @@ public class AlbumAdapter extends Adapter<AlbumAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textviewArtist;
-        public TextView textviewAlbum;
+        public TextView  textviewArtist;
+        public TextView  textviewAlbum;
+        public ImageView imageId;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textviewAlbum = (TextView) itemView.findViewById(R.id.textViewAlbumName);
+            textviewAlbum  = (TextView) itemView.findViewById(R.id.textViewAlbumName);
             textviewArtist = (TextView) itemView.findViewById(R.id.textViewArtistName);
+            imageId        = (ImageView) itemView.findViewById(R.id.image_id);
         }
     }
 }
